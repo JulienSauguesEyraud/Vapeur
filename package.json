@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "@prisma/client": "^6.19.0",
+    "express": "^5.2.1",
+    "hbs": "^4.2.0",
+    "nodemon": "^3.1.11",
+    "prisma": "6.19.0",
+    "sqlite3": "^5.1.7"
+  },
+  "name": "vapeur",
+  "version": "1.0.0",
+  "description": "Groupe : Julien Saugues--Eyraud / Lucas Bieszczad / Bertrand Pradier",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JulienSauguesEyraud/Vapeur.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JulienSauguesEyraud/Vapeur/issues"
+  },
+  "homepage": "https://github.com/JulienSauguesEyraud/Vapeur#readme"
+}
