@@ -1,0 +1,5 @@
+<h1>Supprimer {{jeu.titre}}</h1>
+<p>Êtes-vous sûr de vouloir supprimer ce jeu ? Cette action est irréversible.</p>
+<form action="/jeux/suppression/{{jeu.id}}" method="POST">
+    <button type="submit">Confirmer la suppression</button>
+</form>

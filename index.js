@@ -14,6 +14,7 @@ app.set("view engine", "hbs"); // On définit le moteur de template que Express 
 app.set("views", path.join(__dirname, "views")); // On définit le dossier des vues (dans lequel se trouvent les fichiers .hbs)
 hbs.registerPartials(path.join(__dirname, "views", "partials")); // On définit le dossier des partials (composants e.g. header, footer, menu...)
 app.use(express.static(path.join(__dirname, "views"))); // On définit le dossier des fichiers statiques (CSS, JS, images...)
+app.use(bodyParser.urlencoded({ extended: true })); // Pour parser le corps des requêtes POST
 
 // Page d'accueil
 app.get('/', async (req, res) => {
@@ -26,6 +27,86 @@ app.get('/', async (req, res) => {
         }
     });
     res.render('index', { jeux });
+});
+
+app.get('/jeux', async (req, res) => {
+    const jeux = await prisma.jeu.findMany();
+    res.render('jeux', { jeux });
+});
+
+app.post('/jeux', async (req, res) => {
+    const jeu = req.body;
+    await prisma.jeu.create({
+        data: {
+            titre: jeu.titre,
+            description: jeu.description,
+            dateSortie: new Date(jeu.dateSortie),
+            genreId: parseInt(jeu.genre),
+            editeurId: parseInt(jeu.editeur),
+        }
+    });
+    res.redirect('/jeux');
+});
+
+app.get('/jeux/creation', async (req, res) => {
+    const genres = await prisma.genre.findMany();
+    const editeurs = await prisma.editeur.findMany();
+    res.render('jeux/creation', { genres, editeurs });
+});
+
+app.get('/jeux/:id', async (req, res) => {
+    const id = parseInt(req.params.id);
+    const jeu = await prisma.jeu.findUnique({
+        where: { id: id },
+        include: { 
+            genre: true,
+            editeur: true
+        }
+    });
+    res.render('jeux/details', { jeu });
+});
+
+app.post('/jeux/:id', async (req, res) => {
+    const id = parseInt(req.params.id);
+    const jeu = req.body;
+    await prisma.jeu.update({
+        where: { id: id },
+        data: {
+            titre: jeu.titre,
+            description: jeu.description,
+            dateSortie: new Date(jeu.dateSortie),
+            genreId: parseInt(jeu.genre),
+            editeurId: parseInt(jeu.editeur),
+        }
+    });
+    res.redirect(`/jeux/${id}`);
+});
+
+app.get('/jeux/modification/:id', async (req, res) => {
+    const id = parseInt(req.params.id);
+    let jeu = await prisma.jeu.findUnique({
+        where: { id: id }
+    });
+    jeu.dateSortie = jeu.dateSortie.toISOString().split('T')[0];
+    const genres = await prisma.genre.findMany();
+    const editeurs = await prisma.editeur.findMany();
+    res.render('jeux/modification', { jeu, genres, editeurs });
+});
+
+app.get('/jeux/suppression/:id', async (req, res) => {
+    const id = parseInt(req.params.id);
+    const jeu = await prisma.jeu.findUnique({
+        where: { id: id }
+    });
+    res.render('jeux/suppression', { jeu });
+});
+
+app.post('/jeux/suppression/:id', async (req, res) => {
+    const id = parseInt(req.params.id);
+    await prisma.jeu.delete({
+        where: { id: id }
+    });
+    res.redirect('/jeux');
 });
 
 // Démarrage du serveur
