@@ -1,9 +1,12 @@
 <h1>Détails de {{editeur.nom}}</h1>
 
-
-{{#each jeux}}
-    <p>Jeu publié: <a href="/jeux/{{id}}">{{titre}}</a></p>
+<p>Jeux publiés :</p>
+<ul>
+    {{#each jeux}}
+    <li><a href="/jeux/{{id}}">{{titre}}</a></li>
 {{/each}}
+</ul>
+
 
 <a href="/editeurs/modification/{{editeur.id}}">Modifier l'éditeur</a>
 <br>
