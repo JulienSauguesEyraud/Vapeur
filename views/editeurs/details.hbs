@@ -1,20 +1,14 @@
 <h1>Détails de {{editeur.nom}}</h1>
 
-{{#if jeux.length}}
-    <h2>Jeux publiés :</h2>
-    {{#each jeux}}
-        <p>Jeu publié: <a href="/jeux/{{id}}">{{titre}}</a></p>
-    {{/each}}
-{{else}}
-    <p>Aucun jeu publié par cet éditeur.</p>
-{{/if}}
+
+{{#each jeux}}
+    <p>Jeu publié: <a href="/jeux/{{id}}">{{titre}}</a></p>
+{{/each}}
 
 <a href="/editeurs/modification/{{editeur.id}}">Modifier l'éditeur</a>
 <br>
 
-{{#unless jeux.length}}
-    <a href="/editeurs/suppression/{{editeur.id}}">Supprimer l'éditeur</a>
-    <br>
-{{/unless}}
+<a href="/editeurs/suppression/{{editeur.id}}">Supprimer l'éditeur</a>
+<br>
 
 <a href="/editeurs">Retour à la liste des éditeurs</a>
