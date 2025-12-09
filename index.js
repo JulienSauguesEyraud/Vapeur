@@ -168,9 +168,18 @@ app.get('/editeurs/modification/:id', async (req, res) => {
 
 app.get('/editeurs/suppression/:id', async (req, res) => {
     const id = parseInt(req.params.id);
+    //verifier si il y a au moins un jeu lié à cet éditeur
+    const jeuxCount = await prisma.jeu.count({
+        where: { editeurId: id }
+    });
+    
     const editeur = await prisma.editeur.findUnique({
         where: { id: id }
     });
+    if (jeuxCount > 0) {
+        res.render('editeurs/Impossiblesuppression', { editeur });
+        return;
+    }
     res.render('editeurs/suppression', { editeur });
 });
 
