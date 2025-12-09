@@ -109,6 +109,78 @@ app.post('/jeux/suppression/:id', async (req, res) => {
     res.redirect('/jeux');
 });
 
+//============================================
+//=============    Lucas Code    =============
+//============================================
+
+app.get('/editeurs', async (req, res) => {
+    const editeurs = await prisma.editeur.findMany();
+    res.render('editeurs', { editeurs });
+});
+
+app.post('/editeurs', async (req, res) => {
+    const editeur = req.body;
+    await prisma.editeur.create({
+        data: {
+            nom: editeur.nom,
+        }
+    });
+    res.redirect('/editeurs');
+});
+
+app.get('/editeurs/creation', async (req, res) => {
+    res.render('editeurs/creation');
+});
+
+app.get('/editeurs/:id', async (req, res) => {
+    const id = parseInt(req.params.id);
+    const editeur = await prisma.editeur.findUnique({
+        where: { id: id }
+    });
+    const jeux = await prisma.jeu.findMany({
+        where: { editeurId: id }
+    });
+    res.render('editeurs/details', { editeur, jeux });
+});
+
+app.post('/editeurs/:id', async (req, res) => {
+    const id = parseInt(req.params.id);
+    const editeur = req.body;
+    await prisma.editeur.update({
+        where: { id: id },
+        data: {
+            nom: editeur.nom,
+        }
+    });
+    res.redirect(`/editeurs/${id}`);
+});
+
+app.get('/editeurs/modification/:id', async (req, res) => {
+    const id = parseInt(req.params.id);
+    let editeur = await prisma.editeur.findUnique({
+        where: { id: id }
+    });
+    res.render('editeurs/modification', { editeur});
+});
+
+app.get('/editeurs/suppression/:id', async (req, res) => {
+    const id = parseInt(req.params.id);
+    const editeur = await prisma.editeur.findUnique({
+        where: { id: id }
+    });
+    res.render('editeurs/suppression', { editeur });
+});
+
+app.post('/editeurs/suppression/:id', async (req, res) => {
+    const id = parseInt(req.params.id);
+    await prisma.editeur.delete({
+        where: { id: id }
+    });
+    res.redirect('/editeurs');
+});
+
+
+
 // Démarrage du serveur
 app.listen(PORT, () => {
     console.log(`Serveur démarré sur le port ${PORT}`);
