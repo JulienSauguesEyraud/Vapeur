@@ -41,8 +41,9 @@ app.post('/jeux', async (req, res) => {
             titre: jeu.titre,
             description: jeu.description,
             dateSortie: new Date(jeu.dateSortie),
-            genreId: parseInt(jeu.genre),
-            editeurId: parseInt(jeu.editeur),
+            genre: { connect: { id: parseInt(jeu.genre) } },
+            editeur: { connect: { id: parseInt(jeu.editeur) } },
+            MisEnAvant: jeu.MisEnAvant === 'on',
         }
     });
     res.redirect('/jeux');
@@ -63,6 +64,7 @@ app.get('/jeux/:id', async (req, res) => {
             editeur: true
         }
     });
+    jeu.dateSortie = jeu.dateSortie.toLocaleDateString('fr-FR');
     res.render('jeux/details', { jeu });
 });
 
@@ -75,8 +77,9 @@ app.post('/jeux/:id', async (req, res) => {
             titre: jeu.titre,
             description: jeu.description,
             dateSortie: new Date(jeu.dateSortie),
-            genreId: parseInt(jeu.genre),
-            editeurId: parseInt(jeu.editeur),
+            genre: { connect: { id: parseInt(jeu.genre) } },
+            editeur: { connect: { id: parseInt(jeu.editeur) } },
+            MisEnAvant: jeu.MisEnAvant === 'on',
         }
     });
     res.redirect(`/jeux/${id}`);
@@ -177,6 +180,34 @@ app.post('/editeurs/suppression/:id', async (req, res) => {
         where: { id: id }
     });
     res.redirect('/editeurs');
+});
+
+
+app.get('/genres', async (req, res) => {
+    const genres = await prisma.genre.findMany({
+        include: { jeux: true },
+        orderBy: { nom: 'asc' }
+    });
+    res.render('genres/index', { genres });
+});
+
+app.get('/genres/:id', async (req, res) => {
+    const id = parseInt(req.params.id);
+    const genre = await prisma.genre.findUnique({
+        where: { id },
+        include: {
+            jeux: {
+                orderBy: { titre: 'asc' },
+                include: { editeur: true }
+            }
+        }
+    });
+
+    if (!genre) {
+        return res.status(404).send('Genre introuvable');
+    }
+
+    res.render('genres/details', { genre });
 });
 
 
