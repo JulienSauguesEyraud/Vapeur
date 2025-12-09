@@ -23,6 +23,9 @@
         {{/each}}
     </select>
 
+    <label for="MisEnAvant">Mettre en avant:</label>
+    <input type="checkbox" id="MisEnAvant" name="MisEnAvant" {{#if jeu.MisEnAvant}}checked{{/if}} />
+
     <button type="submit">Modifier le jeu</button>
 </form>
 

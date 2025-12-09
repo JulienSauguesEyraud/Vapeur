@@ -1,7 +1,9 @@
 <h1>Liste des jeux</h1>
 <ul>
     {{#each jeux}}
-        <li><a href="/jeux/{{id}}">{{titre}}</a></li>
+        <li>
+            <a href="/jeux/{{id}}">{{titre}}</a>
+        </li>
     {{/each}}
 </ul>
 <a href="/jeux/creation">Créer un nouveau jeu</a>
