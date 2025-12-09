@@ -12,8 +12,11 @@
   "description": "Groupe : Julien Saugues--Eyraud / Lucas Bieszczad / Bertrand Pradier",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "npx prisma db seed && node index.js",
+    "dev": "npx prisma db seed && nodemon index.js"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
   },
   "repository": {
     "type": "git",
