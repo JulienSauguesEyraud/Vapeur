@@ -11,6 +11,15 @@ const DEFAULT_GENRES = [
   'MMORPG',
 ];
 
+const DEFAULT_EDITEURS = [
+  'Electronic Arts',
+  'Ubisoft',
+  'Activision Blizzard',
+  'Nintendo',
+  'Sony Interactive Entertainment',
+  'Microsoft Studios',
+];
+
 async function main() {
   for (const nom of DEFAULT_GENRES) {
     const existing = await prisma.genre.findFirst({ where: { nom } });
@@ -18,7 +27,15 @@ async function main() {
       await prisma.genre.create({ data: { nom } });
     }
   }
-  console.log('Seed genres terminé.');
+
+  for (const nom of DEFAULT_EDITEURS) {
+    const existing = await prisma.editeur.findFirst({ where: { nom } });
+    if (!existing) {
+      await prisma.editeur.create({ data: { nom } });
+    }
+  }
+
+  console.log('Seed genres et éditeurs terminé.');
 }
 
 main()
