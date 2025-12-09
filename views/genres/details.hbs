@@ -1,0 +1,18 @@
+<h1>{{genre.nom}}</h1>
+<p>Jeux :</p>
+{{#if genre.jeux.length}}
+    <ul>
+        {{#each genre.jeux}}
+            <li>
+                <a href="/jeux/{{id}}">{{titre}}</a>
+                {{#if editeur}}
+                    <span>- {{editeur.nom}}</span>
+                {{/if}}
+                <p>{{description}}</p>
+            </li>
+        {{/each}}
+    </ul>
+{{else}}
+    <p>Aucun jeu.</p>
+{{/if}}
+<a href="/genres">Retour aux genres</a>

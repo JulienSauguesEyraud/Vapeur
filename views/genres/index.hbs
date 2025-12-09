@@ -1,0 +1,11 @@
+<h1>Genres de jeux</h1>
+{{#if genres.length}}
+    <ul>
+        {{#each genres}}
+            <li>
+                <a href="/genres/{{id}}">{{nom}}</a>
+            </li>
+        {{/each}}
+    </ul>
+{{/if}}
+<a href="/">Retour à l'accueil</a>
