@@ -1,3 +1,4 @@
+{{!-- Formulaire de modification d'un jeu --}}
 <h1>Modifier {{jeu.titre}}</h1>
 <form action="/jeux/{{jeu.id}}" method="POST">
     <label for="titre">Titre:</label>
@@ -6,9 +7,11 @@
     <label for="description">Description:</label>
     <textarea id="description" name="description" required>{{jeu.description}}</textarea>
 
+    {{!-- Date pré-remplie au format yyyy-mm-dd pour l'input --}}
     <label for="dateSortie">Date de sortie:</label>
     <input type="date" id="dateSortie" name="dateSortie" value="{{jeu.dateSortie}}" required />
 
+    {{!-- Les listes ne sélectionnent pas l'option actuelle (peut être amélioré) --}}
     <label for="genre">Genre:</label>
     <select id="genre" name="genre" required>
         {{#each genres}}
@@ -23,6 +26,7 @@
         {{/each}}
     </select>
 
+    {{!-- Checkbox cochée si MisEnAvant est true --}}
     <label for="MisEnAvant">Mettre en avant:</label>
     <input type="checkbox" id="MisEnAvant" name="MisEnAvant" {{#if jeu.MisEnAvant}}checked{{/if}} />
 

@@ -1,8 +1,10 @@
+{{!-- Liste des genres --}}
 <h1>Genres de jeux</h1>
 {{#if genres.length}}
     <ul>
         {{#each genres}}
             <li>
+                {{!-- Lien vers les détails du genre --}}
                 <a href="/genres/{{id}}">{{nom}}</a>
             </li>
         {{/each}}

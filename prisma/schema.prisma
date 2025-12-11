@@ -4,33 +4,38 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+// Génération du client Prisma pour Node.js
 generator client {
   provider = "prisma-client-js"
 }
 
+// Source de données: SQLite via variable d'environnement DATABASE_URL
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
+// Modèle Jeu: entité principale avec relations vers Genre et Editeur
 model Jeu {
-  id          Int      @id @default(autoincrement())
-  titre       String
-  description String
-  dateSortie DateTime
-  MisEnAvant Boolean  @default(false)
-  genre      Genre   @relation(fields: [genreId], references: [id])
-  genreId    Int
-  editeur    Editeur @relation(fields: [editeurId], references: [id])
-  editeurId  Int
+  id          Int      @id @default(autoincrement()) // PK auto-incrémentée
+  titre       String                                  // Titre du jeu
+  description String                                  // Description du jeu
+  dateSortie  DateTime                                // Date de sortie
+  MisEnAvant  Boolean  @default(false)                // Flag mise en avant
+  genre       Genre   @relation(fields: [genreId], references: [id]) // relation requise
+  genreId     Int
+  editeur     Editeur @relation(fields: [editeurId], references: [id]) // relation requise
+  editeurId   Int
 }
 
+// Modèle Genre: catégorise les jeux
 model Genre {
   id   Int    @id @default(autoincrement())
   nom  String
   jeux Jeu[]
 }
 
+// Modèle Editeur: maison d'édition des jeux
 model Editeur {
   id   Int    @id @default(autoincrement())
   nom  String

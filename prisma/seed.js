@@ -1,7 +1,9 @@
+// Script de seed: insère des genres et éditeurs par défaut si absents
 const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
+// Genres créés par défaut
 const DEFAULT_GENRES = [
   'Action',
   'Aventure',
@@ -11,6 +13,7 @@ const DEFAULT_GENRES = [
   'MMORPG',
 ];
 
+// Éditeurs créés par défaut
 const DEFAULT_EDITEURS = [
   'Electronic Arts',
   'Ubisoft',
@@ -20,6 +23,7 @@ const DEFAULT_EDITEURS = [
   'Microsoft Studios',
 ];
 
+// Insère les entrées en évitant les doublons
 async function main() {
   for (const nom of DEFAULT_GENRES) {
     const existing = await prisma.genre.findFirst({ where: { nom } });
@@ -38,6 +42,7 @@ async function main() {
   console.log('Seed genres et éditeurs terminé.');
 }
 
+// Exécution du seed avec gestion d'erreur et fermeture de connexion
 main()
   .catch((err) => {
     console.error('Erreur de seed', err);

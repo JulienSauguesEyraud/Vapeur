@@ -1,3 +1,4 @@
+{{!-- Formulaire de création d'un jeu --}}
 <h1>Créer un nouveau jeu</h1>
 <form action="/jeux" method="POST">
     <label for="titre">Titre:</label>
@@ -6,9 +7,11 @@
     <label for="description">Description:</label>
     <textarea id="description" name="description" required></textarea>
 
+    {{!-- Date de sortie (input type=date) --}}
     <label for="dateSortie">Date de sortie:</label>
     <input type="date" id="dateSortie" name="dateSortie" required />
 
+    {{!-- Sélection du genre (valeur = id) --}}
     <label for="genre">Genre:</label>
     <select id="genre" name="genre" required>
         {{#each genres}}
@@ -16,6 +19,7 @@
         {{/each}}
     </select>
 
+    {{!-- Sélection de l'éditeur (valeur = id) --}}
     <label for="editeur">Éditeur:</label>
     <select id="editeur" name="editeur" required>
         {{#each editeurs}}
@@ -23,6 +27,7 @@
         {{/each}}
     </select>
 
+    {{!-- Checkbox de mise en avant --}}
     <label for="MisEnAvant">Mettre en avant:</label>
     <input type="checkbox" id="MisEnAvant" name="MisEnAvant" />
 

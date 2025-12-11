@@ -1,5 +1,7 @@
+{{!-- Détails d'un jeu individuel --}}
 <h1>Détails de {{jeu.titre}}</h1>
 <p>Description: {{jeu.description}}</p>
+{{!-- Date déjà formatée côté serveur au format fr-FR --}}
 <p>Date de sortie: {{jeu.dateSortie}}</p>
 <a href="/genres/{{jeu.genre.id}}">Genre: {{jeu.genre.nom}}</a><br><br>
 <a href="/editeurs/{{jeu.editeur.id}}">Éditeur: {{jeu.editeur.nom}}</a><br>
