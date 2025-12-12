@@ -1,10 +1,45 @@
 {{!-- Page d'accueil: liste des jeux mis en avant --}}
-<h1>Bienvenue sur Vapeur</h1>
-<h2>Jeux mis en avant</h2>
-<ul>
-    {{#each jeux}}
-        {{!-- Lien vers la page de détails du jeu --}}
-        <li><a href="/jeux/{{id}}">{{titre}}</a></li>
-    {{/each}}
-</ul>
-<a href="/jeux">Voir tous les jeux</a>
+<section>
+    <h1 style="text-align: center; color: var(--text-primary); margin-bottom: var(--spacing-lg);">Bienvenue sur Vapeur</h1>
+    <p style="text-align: center; font-size: 1.1rem; color: var(--text-secondary); margin-bottom: var(--spacing-xl);">Gérez votre bibliothèque de jeux vidéo</p>
+</section>
+
+<section>
+    <h2>Jeux populaires</h2>
+    {{#if jeux}}
+        <div class="game-grid">
+            {{#each jeux}}
+                <div class="game-card">
+                    <div class="game-card-header">
+                        <div class="game-card-title">{{titre}}</div>
+                        <div class="game-card-subtitle">{{genre.nom}}</div>
+                    </div>
+                    <div class="game-card-body">
+                        <p>{{description}}</p>
+                        <div class="game-card-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Éditeur</span>
+                                <span class="meta-value">{{editeur.nom}}</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Statut</span>
+                                <span class="meta-value badge badge-primary">En avant</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-card-actions">
+                        <a href="/jeux/{{id}}" class="btn">Voir détails</a>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    {{else}}
+        <div class="alert alert-info">
+            Aucun jeu en avant pour le moment.
+        </div>
+    {{/if}}
+</section>
+
+<section style="text-align: center;">
+    <a href="/jeux" class="btn" style="padding: var(--spacing-md) var(--spacing-xl); font-size: 1.1rem;">Voir tous les jeux</a>
+</section>

@@ -1,14 +1,63 @@
 {{!-- Détails d'un jeu individuel --}}
-<h1>Détails de {{jeu.titre}}</h1>
-<p>Description: {{jeu.description}}</p>
-{{!-- Date déjà formatée côté serveur au format fr-FR --}}
-<p>Date de sortie: {{jeu.dateSortie}}</p>
-<a href="/genres/{{jeu.genre.id}}">Genre: {{jeu.genre.nom}}</a><br><br>
-<a href="/editeurs/{{jeu.editeur.id}}">Éditeur: {{jeu.editeur.nom}}</a><br>
-<p>Mis en avant: {{#if jeu.MisEnAvant}}Oui{{else}}Non{{/if}}</p>
+<section>
+    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: var(--spacing-lg);">
+        <div>
+            <h1>{{jeu.titre}}</h1>
+            <p style="font-size: 1.05rem; color: var(--text-secondary); margin: 0;">{{jeu.genre.nom}} • {{jeu.editeur.nom}}</p>
+        </div>
+        {{#if jeu.MisEnAvant}}
+            <span class="badge badge-primary">En avant</span>
+        {{/if}}
+    </div>
+</section>
 
-<a href="/jeux/modification/{{jeu.id}}">Modifier le jeu</a>
-<br>
-<a href="/jeux/suppression/{{jeu.id}}">Supprimer le jeu</a>
-<br>
-<a href="/jeux">Retour à la liste des jeux</a>
+<div class="details-container">
+    <div class="details-main">
+        <div class="card" style="border: 1px solid var(--border-color); background: #161a21;">
+            <div class="card-header" style="border: none; padding-bottom: 0;">
+                <h3 style="margin: 0;">À propos</h3>
+            </div>
+            <div class="card-body" style="margin-bottom: 0;">
+                <p style="color: var(--text-secondary); white-space: pre-line;">{{jeu.description}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="details-sidebar">
+        <div class="card" style="border: 1px solid var(--border-color); background: #161a21;">
+            <div class="card-header" style="border: none; padding-bottom: 0;">
+                <h3 style="margin: 0;">Infos</h3>
+            </div>
+            <div class="card-body" style="margin-bottom: 0;">
+                <div class="info-stack">
+                    <div class="info-row">
+                        <span class="info-label">Date de sortie</span>
+                        <span class="info-value">{{jeu.dateSortie}}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Éditeur</span>
+                        <span class="info-value"><a href="/editeurs/{{jeu.editeur.id}}">{{jeu.editeur.nom}}</a></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Genre</span>
+                        <span class="info-value"><a href="/genres/{{jeu.genre.id}}">{{jeu.genre.nom}}</a></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Statut</span>
+                        <span class="info-value">{{#if jeu.MisEnAvant}}En avant{{else}}Standard{{/if}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="border: 1px solid var(--border-color); background: #161a21;">
+            <div class="card-body" style="margin-bottom: 0;">
+                <div class="action-group" style="flex-direction: column; margin-top: 0; gap: var(--spacing-sm);">
+                    <a href="/jeux/modification/{{jeu.id}}" class="btn" style="width: 100%;">Modifier le jeu</a>
+                    <a href="/jeux/suppression/{{jeu.id}}" class="btn btn-danger" style="width: 100%;">Supprimer</a>
+                    <a href="/jeux" class="btn btn-secondary" style="width: 100%;">Retour aux jeux</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

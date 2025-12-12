@@ -1,21 +1,74 @@
 {{!-- Détails d'un éditeur --}}
-<h1>Détails de {{editeur.nom}}</h1>
+<section>
+    <h1>{{editeur.nom}}</h1>
+    <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: var(--spacing-xl);">Maison d'édition de jeux vidéo</p>
+</section>
 
-<p>Jeux publiés :</p>
-{{#if jeux.length}}
-<ul>
-    {{#each jeux}}
-        <li><a href="/jeux/{{id}}">{{titre}}</a></li>
-    {{/each}}
-</ul>
-{{else}}
-<p>Aucun jeu.</p>
-{{/if}}
+<div class="details-container">
+    <div class="details-main">
+        <section>
+            <h2>Jeux publiés</h2>
+            {{#if jeux.length}}
+                <div class="game-grid">
+                    {{#each jeux}}
+                        <div class="game-card">
+                            <div class="game-card-header">
+                                <div class="game-card-title">{{titre}}</div>
+                                <div class="game-card-subtitle">{{genre.nom}}</div>
+                            </div>
+                            <div class="game-card-body">
+                                <p>{{description}}</p>
+                                <div class="game-card-meta">
+                                    <div class="meta-item">
+                                        <span class="meta-label">Genre</span>
+                                        <span class="meta-value">{{genre.nom}}</span>
+                                    </div>
+                                    <div class="meta-item">
+                                        <span class="meta-label">Éditeur</span>
+                                        <span class="meta-value">{{../editeur.nom}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="game-card-actions">
+                                <a href="/jeux/{{id}}" class="btn">Voir le jeu</a>
+                            </div>
+                        </div>
+                    {{/each}}
+                </div>
+            {{else}}
+                <div class="alert alert-info">
+                    <strong>Aucun jeu publié par cet éditeur.</strong>
+                </div>
+            {{/if}}
+        </section>
+    </div>
 
-<a href="/editeurs/modification/{{editeur.id}}">Modifier l'éditeur</a>
-<br>
+    <div class="details-sidebar">
+        <div class="card">
+            <div class="card-header">
+                <h3>Actions</h3>
+            </div>
+            <div class="card-body">
+                <div class="action-group" style="flex-direction: column;">
+                    <a href="/editeurs/modification/{{editeur.id}}" class="btn" style="width: 100%;">Modifier l'éditeur</a>
+                    <a href="/editeurs/suppression/{{editeur.id}}" class="btn btn-danger" style="width: 100%;">Supprimer</a>
+                </div>
+            </div>
+        </div>
 
-<a href="/editeurs/suppression/{{editeur.id}}">Supprimer l'éditeur</a>
-<br>
+        <div class="card">
+            <div class="card-body">
+                <div style="padding: var(--spacing-md); background-color: var(--bg-color); border-radius: var(--radius-md);">
+                    <span class="meta-label">Nombre de jeux</span>
+                    <p style="margin: var(--spacing-xs) 0 0; font-size: 1.5rem; font-weight: 600; color: var(--primary-color);">{{jeux.length}}</p>
+                </div>
+            </div>
+        </div>
 
-<a href="/editeurs">Retour à la liste des éditeurs</a>
+        <div class="card">
+            <div class="card-footer" style="border: none; padding: 0; margin: 0;">
+                <a href="/editeurs" class="btn btn-secondary" style="width: 100%; margin: 0;">Retour aux éditeurs</a>
+            </div>
+        </div>
+    </div>
+</div>

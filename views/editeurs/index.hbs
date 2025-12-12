@@ -1,7 +1,27 @@
-<h1>Liste des éditeurs</h1>
-<ul>
-    {{#each editeurs}}
-        <li><a href="/editeurs/{{id}}">{{nom}}</a></li>
-    {{/each}}
-</ul>
-<a href="/editeurs/creation">Créer un nouvel éditeur</a>
+<section>
+    <div class="display-flex justify-between align-center" style="margin-bottom: var(--spacing-lg);">
+        <h1>Éditeurs de jeux</h1>
+        <a href="/editeurs/creation" class="btn btn-success">Créer un éditeur</a>
+    </div>
+
+    {{#if editeurs.length}}
+        <div class="card">
+            {{#each editeurs}}
+                <div class="item-row">
+                    <div class="item-info">
+                        <div class="item-title">{{nom}}</div>
+                        <div class="item-subtitle">Maison d'édition</div>
+                    </div>
+                    <div class="item-actions">
+                        <a href="/editeurs/{{id}}" class="btn btn-outline" style="margin: 0;">Voir les jeux</a>
+                        <a href="/editeurs/modification/{{id}}" class="btn btn-outline" style="margin: 0;">Modifier</a>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    {{else}}
+        <div class="alert alert-info">
+            Aucun éditeur trouvé. Créez votre premier éditeur pour commencer.
+        </div>
+    {{/if}}
+</section>

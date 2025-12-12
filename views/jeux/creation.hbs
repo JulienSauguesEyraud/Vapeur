@@ -1,37 +1,61 @@
 {{!-- Formulaire de création d'un jeu --}}
-<h1>Créer un nouveau jeu</h1>
-<form action="/jeux" method="POST">
-    <label for="titre">Titre:</label>
-    <input type="text" id="titre" name="titre" required />
+<section>
+    <h1>Créer un nouveau jeu</h1>
+    
+    <div class="form-container">
+        <form action="/jeux" method="POST">
+            <div class="form-group">
+                <label for="titre">Titre du jeu:</label>
+                <input type="text" id="titre" name="titre" placeholder="Ex: The Legend of Zelda" required />
+                <small>Le nom du jeu à créer</small>
+            </div>
 
-    <label for="description">Description:</label>
-    <textarea id="description" name="description" required></textarea>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" placeholder="Décrivez votre jeu..." required></textarea>
+                <small>Donnez une description détaillée du jeu</small>
+            </div>
 
-    {{!-- Date de sortie (input type=date) --}}
-    <label for="dateSortie">Date de sortie:</label>
-    <input type="date" id="dateSortie" name="dateSortie" required />
+            <div class="form-group">
+                <label for="dateSortie">Date de sortie:</label>
+                <input type="date" id="dateSortie" name="dateSortie" required />
+                <small>Date officielle de lancement</small>
+            </div>
 
-    {{!-- Sélection du genre (valeur = id) --}}
-    <label for="genre">Genre:</label>
-    <select id="genre" name="genre" required>
-        {{#each genres}}
-            <option value="{{id}}">{{nom}}</option>
-        {{/each}}
-    </select>
+            <div class="form-group">
+                <label for="genre">Genre:</label>
+                <select id="genre" name="genre" required>
+                    <option value="">-- Sélectionnez un genre --</option>
+                    {{#each genres}}
+                        <option value="{{id}}">{{nom}}</option>
+                    {{/each}}
+                </select>
+                <small>Catégorie du jeu</small>
+            </div>
 
-    {{!-- Sélection de l'éditeur (valeur = id) --}}
-    <label for="editeur">Éditeur:</label>
-    <select id="editeur" name="editeur" required>
-        {{#each editeurs}}
-            <option value="{{id}}">{{nom}}</option>
-        {{/each}}
-    </select>
+            <div class="form-group">
+                <label for="editeur">Éditeur:</label>
+                <select id="editeur" name="editeur" required>
+                    <option value="">-- Sélectionnez un éditeur --</option>
+                    {{#each editeurs}}
+                        <option value="{{id}}">{{nom}}</option>
+                    {{/each}}
+                </select>
+                <small>Maison d'édition responsable</small>
+            </div>
 
-    {{!-- Checkbox de mise en avant --}}
-    <label for="MisEnAvant">Mettre en avant:</label>
-    <input type="checkbox" id="MisEnAvant" name="MisEnAvant" />
+            <div class="form-group">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="MisEnAvant" name="MisEnAvant" />
+                    <label for="MisEnAvant">Mettre en avant ce jeu</label>
+                </div>
+                <small>Apparaîtra sur la page d'accueil si coché</small>
+            </div>
 
-    <button type="submit">Créer le jeu</button>
-</form>
-
-<a href="/jeux">Annuler</a>
+            <div class="action-group" style="gap: var(--spacing-lg);">
+                <button type="submit" class="btn btn-success" style="flex: 2;">Créer le jeu</button>
+                <a href="/jeux" class="btn btn-secondary" style="flex: 1; padding: var(--spacing-xs) var(--spacing-md); text-align: center;">Annuler</a>
+            </div>
+        </form>
+    </div>
+</section>

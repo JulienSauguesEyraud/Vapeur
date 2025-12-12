@@ -9,19 +9,24 @@
     <body>
         {{!-- En-tête du site et navigation principale --}}
         <header>
-            <nav>
-                <a href="/">Accueil</a> |
-                <a href="/jeux">Jeux</a> |
-                <a href="/editeurs">Éditeurs</a> |
-                <a href="/genres">Genres</a>
+            <nav class="display-flex align-center justify-between">
+                <strong style="font-size: 1.5rem; color: var(--primary-color);">Vapeur</strong>
+                <div class="display-flex gap-2 align-center">
+                    <a href="/">Accueil</a>
+                    <a href="/jeux">Jeux</a>
+                    <a href="/editeurs">Éditeurs</a>
+                    <a href="/genres">Genres</a>
+                </div>
             </nav>
         </header>
         {{!-- Contenu spécifique à chaque page --}}
-        {{{ body }}}
+        <main class="container">
+            {{{ body }}}
+        </main>
 
         {{!-- Pied de page --}}
         <footer>
-            <p>&copy; 2025 Vapeur</p>
+            <p>&copy; 2025 Vapeur - Gestion de jeux vidéo</p>
         </footer>
     </body>
 </html>

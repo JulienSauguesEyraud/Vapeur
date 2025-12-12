@@ -1,16 +1,45 @@
 {{!-- Détails d'un genre et la liste de ses jeux --}}
-<h1>{{genre.nom}}</h1>
-<p>Jeux de ce genre :</p>
-{{#if genre.jeux.length}}
-    <ul>
-        {{#each genre.jeux}}
-            <li>
-                {{!-- Lien vers un jeu de ce genre --}}
-                <a href="/jeux/{{id}}">{{titre}}</a>
-            </li>
-        {{/each}}
-    </ul>
-{{else}}
-    <p>Aucun jeu.</p>
-{{/if}}
-<a href="/genres">Retour aux genres</a>
+<section>
+    <h1>{{genre.nom}}</h1>
+    <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: var(--spacing-xl);">Catégorie de jeux vidéo</p>
+</section>
+
+<section>
+    <h2>Jeux de ce genre</h2>
+    {{#if genre.jeux.length}}
+        <div class="game-grid">
+            {{#each genre.jeux}}
+                <div class="game-card">
+                    <div class="game-card-header">
+                        <div class="game-card-title">{{titre}}</div>
+                        <div class="game-card-subtitle">{{editeur.nom}}</div>
+                    </div>
+                    <div class="game-card-body">
+                        <p>{{description}}</p>
+                        <div class="game-card-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Genre</span>
+                                <span class="meta-value">{{../genre.nom}}</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Éditeur</span>
+                                <span class="meta-value">{{editeur.nom}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-card-actions">
+                        <a href="/jeux/{{id}}" class="btn">Voir le jeu</a>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    {{else}}
+        <div class="alert alert-info">
+            <strong>Aucun jeu dans cette catégorie.</strong>
+        </div>
+    {{/if}}
+</section>
+
+<section style="text-align: center;">
+    <a href="/genres" class="btn btn-secondary">Retour aux genres</a>
+</section>

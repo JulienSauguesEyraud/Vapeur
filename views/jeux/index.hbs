@@ -1,11 +1,25 @@
 {{!-- Liste des jeux --}}
-<h1>Liste des jeux</h1>
-<ul>
-    {{#each jeux}}
-        <li>
-            {{!-- Lien vers les détails du jeu --}}
-            <a href="/jeux/{{id}}">{{titre}}</a>
-        </li>
-    {{/each}}
-</ul>
-<a href="/jeux/creation">Créer un nouveau jeu</a>
+<section>
+    <div class="display-flex justify-between align-center" style="margin-bottom: var(--spacing-lg);">
+        <h1>Liste des jeux</h1>
+        <a href="/jeux/creation" class="btn btn-success">Créer un nouveau jeu</a>
+    </div>
+
+    {{#if jeux}}
+        {{#each jeux}}
+            <a class="click-card" href="/jeux/{{id}}">
+                <div>
+                    <div class="click-card-title">{{titre}}</div>
+                    <div class="click-card-meta">{{genre.nom}} • {{editeur.nom}}</div>
+                </div>
+                {{#if MisEnAvant}}
+                    <span class="badge badge-primary">En avant</span>
+                {{/if}}
+            </a>
+        {{/each}}
+    {{else}}
+        <div class="alert alert-info">
+            Aucun jeu trouvé. Créez votre premier jeu pour commencer.
+        </div>
+    {{/if}}
+</section>
