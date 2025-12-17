@@ -11,18 +11,17 @@
     <label for="dateSortie">Date de sortie:</label>
     <input type="date" id="dateSortie" name="dateSortie" value="{{jeu.dateSortie}}" required />
 
-    {{!-- Les listes ne sélectionnent pas l'option actuelle (peut être amélioré) --}}
     <label for="genre">Genre:</label>
     <select id="genre" name="genre" required>
         {{#each genres}}
-            <option value="{{id}}">{{nom}}</option>
+            <option value="{{id}}" {{#if (eq id ../jeu.genreId)}}selected{{/if}}>{{nom}}</option>
         {{/each}}
     </select>
 
     <label for="editeur">Éditeur:</label>
     <select id="editeur" name="editeur" required>
         {{#each editeurs}}
-            <option value="{{id}}">{{nom}}</option>
+            <option value="{{id}}" {{#if (eq id ../jeu.editeurId)}}selected{{/if}}>{{nom}}</option>
         {{/each}}
     </select>
 

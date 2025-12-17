@@ -13,6 +13,8 @@ const hbs = require("hbs");
 app.set("view engine", "hbs"); // On définit le moteur de template que Express va utiliser
 app.set("views", path.join(__dirname, "views")); // On définit le dossier des vues (dans lequel se trouvent les fichiers .hbs)
 hbs.registerPartials(path.join(__dirname, "views", "partials")); // On définit le dossier des partials (composants e.g. header, footer, menu...)
+// Helper Handlebars pour comparer deux valeurs (usage: {{#if (eq a b)}} ... {{/if}})
+hbs.registerHelper('eq', (a, b) => a === b);
 app.use(express.static(path.join(__dirname, "views"))); // On définit le dossier des fichiers statiques (CSS, JS, images...)
 app.use(bodyParser.urlencoded({ extended: true })); // Pour parser le corps des requêtes POST
 
@@ -31,7 +33,11 @@ app.get('/', async (req, res) => {
 
     // GET /jeux - liste tous les jeux
 app.get('/jeux', async (req, res) => {
-    const jeux = await prisma.jeu.findMany();
+    const jeux = await prisma.jeu.findMany({
+        orderBy: {
+            titre: 'asc'
+        }
+    });
     res.render('jeux', { jeux });
 });
 
@@ -127,7 +133,9 @@ app.post('/jeux/suppression/:id', async (req, res) => {
 
 // GET /editeurs - liste tous les éditeurs
 app.get('/editeurs', async (req, res) => {
-    const editeurs = await prisma.editeur.findMany();
+    const editeurs = await prisma.editeur.findMany({
+        orderBy: { nom: 'asc' }
+    });
     res.render('editeurs', { editeurs });
 });
 
