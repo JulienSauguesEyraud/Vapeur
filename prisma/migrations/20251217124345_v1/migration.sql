@@ -1,0 +1,24 @@
+-- CreateTable
+CREATE TABLE "Jeu" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "titre" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "dateSortie" DATETIME NOT NULL,
+    "MisEnAvant" BOOLEAN NOT NULL DEFAULT false,
+    "genreId" INTEGER NOT NULL,
+    "editeurId" INTEGER NOT NULL,
+    CONSTRAINT "Jeu_genreId_fkey" FOREIGN KEY ("genreId") REFERENCES "Genre" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "Jeu_editeurId_fkey" FOREIGN KEY ("editeurId") REFERENCES "Editeur" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "Genre" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "nom" TEXT NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "Editeur" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "nom" TEXT NOT NULL
+);

@@ -6,7 +6,8 @@ Projet Node.js/Prisma/Handlebars pour gérer une ludothèque
 ## Démarrage rapide
 - Installer les dépendances : `npm install`
 - Créer le fichier `.env` à la racine avec `DATABASE_URL="file:./database.db"`
-- Initialiser la base : `npx prisma migrate dev --name init` puis `npx prisma db seed`
+- Initialiser la base : `npx prisma migrate deploy`
+- Générer le prisma client : `npx prisma generate`
 - Lancer le serveur : `npm start`
 - Ouvrir le site sur `http://localhost:8080`
 
@@ -21,7 +22,7 @@ Projet Node.js/Prisma/Handlebars pour gérer une ludothèque
 - `index.js` : point d’entrée Express
 
 ## Équipe
-- Julien Saugues-Eyraud
+- Julien Saugues--Eyraud
 - Lucas Bieszczad
 - Bertrand Pradier
 
